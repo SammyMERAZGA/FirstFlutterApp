@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formation/favoriteWidget.dart';
 
 class RecipeScreen extends StatelessWidget {
   @override
@@ -19,8 +20,7 @@ class RecipeScreen extends StatelessWidget {
                     Text("Par Smy", style: TextStyle(color: Colors.grey, fontSize: 16)),
                   ],
                 )),
-            Icon(Icons.favorite, color: Colors.red),
-            Text("55")
+            FavoriteWidget(isFavorited: true, favoriteCount: 55),
           ],
         ));
 
