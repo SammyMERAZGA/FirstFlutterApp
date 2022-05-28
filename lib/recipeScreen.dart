@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:formation/favoriteWidget.dart';
 import 'package:formation/recipe.dart';
@@ -6,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'favoriteChangeNotifier.dart';
 
 class RecipeScreen extends StatelessWidget {
-  const RecipeScreen({Key ?key, required this.recipe}) : super(key: key);
+  const RecipeScreen({Key? key, required this.recipe}) : super(key: key);
   final Recipe recipe;
 
   @override
@@ -17,16 +18,18 @@ class RecipeScreen extends StatelessWidget {
           children: [
             Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Text(recipe.title,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                    ),
-                    Text(recipe.user, style: TextStyle(color: Colors.grey, fontSize: 16)),
-                  ],
-                )),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(recipe.title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                ),
+                Text(recipe.user,
+                    style: TextStyle(color: Colors.grey, fontSize: 16)),
+              ],
+            )),
             FavoriteIconWidget(),
             FavoriteTextWidget(),
           ],
@@ -52,27 +55,30 @@ class RecipeScreen extends StatelessWidget {
     );
 
     return ChangeNotifierProvider(
-      create: (context) => FavoriteChangeNotifier(recipe.isFavorite, recipe.favoriteCount),
+      create: (context) =>
+          FavoriteChangeNotifier(recipe.isFavorite, recipe.favoriteCount),
       child: Scaffold(
           appBar: AppBar(
             // Here we take the value from the MyHomePage object that was created by
             // the App.build method, and use it to set our appbar title.
             title: Text("Mes recettes"),
           ),
-          body: ListView(
-              children: [
-                FadeInImage.assetNetwork(
-                  placeholder: 'images/sharingan.gif',
-                  image: recipe.imageUrl,
+          body: ListView(children: [
+            Hero(
+              tag: "imageRecipe" + recipe.title,
+              child: CachedNetworkImage(
+                  imageUrl: recipe.imageUrl,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                   width: 600,
                   height: 240,
-                  fit: BoxFit.cover,
-                ),
-                titleSection,
-                buttonSection,
-                descriptionSection,
-              ])
-      ),
+                  fit: BoxFit.cover),
+            ),
+            titleSection,
+            buttonSection,
+            descriptionSection,
+          ])),
     );
   }
 
