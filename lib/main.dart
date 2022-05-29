@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formation/recipe.dart';
 import 'package:formation/recipeBox.dart';
+import 'package:formation/recipeFormScreen.dart';
 import 'package:formation/recipeListScreen.dart';
 import 'package:formation/recipeScreen.dart';
 
@@ -40,6 +41,8 @@ class RouteGenerator {
                   CurvedAnimation(curve: Curves.ease, parent: animation);
               return FadeTransition(opacity: animation, child: child);
             });
+      case '/newRecipe':
+        return MaterialPageRoute(builder: (context) => RecipeFormScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
