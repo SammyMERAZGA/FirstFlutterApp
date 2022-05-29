@@ -2,7 +2,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:formation/recipe.dart';
-import 'package:formation/recipeDatabase.dart';
+import 'package:formation/recipeBox.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class RecipeListScreen extends StatefulWidget {
   @override
@@ -18,31 +20,27 @@ class RecipeListScreenState extends State<RecipeListScreen> {
       appBar: AppBar(
         title: Text('Mes recettes'),
       ),
-      body: FutureBuilder<List<Recipe>>(
-        future: RecipeDataBase.instance.recipes(),
-        builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {
-          if (snapshot.hasData) {
-            List<Recipe> recipes = snapshot.data;
-            return ListView.builder(
-              itemCount: recipes.length,
-              itemBuilder: (context, index) {
-                final recipe = recipes[index];
-                return Dismissible(
-                    key: Key(recipe.title),
-                    onDismissed: (direction) {
-                      setState(() {
-                        RecipeDataBase.instance.deleteRecipe(recipe);
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('${recipe.title} supprimé')));
-                    },
-                    background: Container(color: Colors.red),
-                    child: RecipeItemWidget(recipe: recipe));
-              },
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
+      body: ValueListenableBuilder(
+        valueListenable: RecipeBox.box.listenable(),
+        builder: (context, Box items, _) {
+          List<String> keys = items.keys.cast<String>().toList();
+          return ListView.builder(
+            itemCount: keys.length,
+            itemBuilder: (context, index) {
+              final recipe = items.get(keys[index]);
+              return Dismissible(
+                  key: Key(recipe.title),
+                  onDismissed: (direction) {
+                    setState(() {
+                      RecipeBox.box.delete(recipe.key());
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${recipe.title} supprimé')));
+                  },
+                  background: Container(color: Colors.red),
+                  child: RecipeItemWidget(recipe: recipe));
+            },
+          );
         },
       ),
     );
