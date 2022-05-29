@@ -1,8 +1,9 @@
-# Formation Flutter - #9 ✅
+# Formation Flutter ✅
 
-A new Flutter project.
+# Discovery complete ✅ Dart language is very difficult and I had a hard time during this training! 🤣
 
-~ Technologies used 💻
+
+# Technologies used 💻
 
 ![Dart](https://img.shields.io/badge/-dart-05122A?style=flat&logo=dart)&nbsp;
 ![Flutter](https://img.shields.io/badge/-flutter-05122A?style=flat&logo=flutter)&nbsp;
