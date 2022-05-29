@@ -4,9 +4,11 @@
 
 # Discovery complete ✅ Dart language is very difficult and I had a hard time during this training! 🤣
   
-<img width="417" alt="Screen1" src="https://user-images.githubusercontent.com/78353572/170867209-7293f324-8ea1-40e7-be6f-cc5df98dc493.png">
+<img width="407" alt="Screen1" src="https://user-images.githubusercontent.com/78353572/170870050-e077ee29-2f51-40b8-aed8-e372d72dbef2.png">
 
-<img width="419" alt="Screen2" src="https://user-images.githubusercontent.com/78353572/170867212-ef10e217-d4af-4c19-b46f-b5aff5d256d5.png">
+<img width="408" alt="Screen2" src="https://user-images.githubusercontent.com/78353572/170870054-ea9cf1a5-c874-4ff4-975b-f6be70d39831.png">
+  
+<img width="408" alt="Screen3" src="https://user-images.githubusercontent.com/78353572/170870063-5b9c8abb-309d-4b2b-8585-afd352ca06e1.png">
 
 # Technologies used 💻
 
