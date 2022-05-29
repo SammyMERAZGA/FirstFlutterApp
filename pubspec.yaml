@@ -29,6 +29,8 @@ environment:
 dependencies:
   transparent_image: ^2.0.0
   cached_network_image: ^3.0.0
+  sqflite: any
+  path: any
   provider: ^4.3.3
   flutter:
     sdk: flutter
